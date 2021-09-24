@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Review Test Assesment'),
+    'name' => 'Review Test Assessment',
 
     /*
     |--------------------------------------------------------------------------
