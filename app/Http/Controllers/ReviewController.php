@@ -2,22 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Repositories\ReviewRepository;
 
 class ReviewController extends Controller
 {
+    /**
+     * @var ReviewRepository
+     */
+    protected $reviewRepository;
 
-    public function submitRating (Request $request) {
-        Review::create([
-            'user_id' => $request->userId,
-            'order_id' => $request->orderId,
+    /**
+     * ReviewController constructor.
+     * @param ReviewRepository $reviewRepository
+     */
+    public function __construct(ReviewRepository $reviewRepository) {
+        $this->reviewRepository = $reviewRepository;
+    }
+
+    /**
+     * Submit rating to the Order
+     * @return JsonResponse
+     */
+    public function submitRating (Request $request): JsonResponse {
+        $this->reviewRepository->addRating([
+            'userId' => $request->userId,
+            'orderId' => $request->orderId,
             'rating' => $request->food,
             'type' => 'FOOD',
         ]);
-        Review::create([
-            'user_id' => $request->userId,
-            'order_id' => $request->orderId,
+        $this->reviewRepository->addRating([
+            'userId' => $request->userId,
+            'orderId' => $request->orderId,
             'rating' => $request->service,
             'type' => 'SERVICE',
         ]);

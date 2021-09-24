@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
                 ->onDelete('cascade');
 
             $table->foreignIdFor(Food::class)
-                ->constrained()
+                ->constrained('foods')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

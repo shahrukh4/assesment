@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Food;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class FoodFactory extends Factory
 {

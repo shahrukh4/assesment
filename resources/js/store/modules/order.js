@@ -9,7 +9,7 @@ import {SET_ORDER_DATA} from '@/js/store/mutation.types'
 export const namespaced = true
 
 /**
- * State related to App
+ * State related to Orders
  * @type {Object}
  */
 export const state = {
@@ -17,15 +17,15 @@ export const state = {
 }
 
 /**
- * Actions related to App
+ * Actions related to Orders
  * @type {Object}
  */
 export const actions = {
   /**
-   * Fetch food data from DB
+   * Fetch orders from DB
    * @param {object} context
    */
-  [GET_FOOD_DATA] ({commit, state}) {
+  [GET_FOOD_DATA] ({commit}) {
     return new Promise((resolve, reject) => {
       axios.get('/api/orders')
       .then(({data}) => {
@@ -60,7 +60,7 @@ export const actions = {
 }
 
 /**
- * Mutations related to App
+ * Mutations related to Orders
  * @type {Object}
  */
 export const mutations = {

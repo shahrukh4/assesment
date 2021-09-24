@@ -1,7 +1,9 @@
 <template>
+  <!-- Order Card Section Begins -->
   <div class="order-section">
     <div class="card mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg m-1">
       <div class="card-body pb-0">
+        <!-- Details Section Begins -->
         <img class="rounded w-100 mb-2" :src="`https://lorempixel.com/400/200/food?${order.food.id}`" :alt="order.food.name">
         <h5 class="card-title">{{order.food.name}}</h5>
         <p class="card-text">{{order.food.description.substring(0, 100)}}</p>
@@ -9,15 +11,16 @@
           <div class="col"><b>Quantities</b></div>
           <div class="col text-right"><b>{{order.quantity}}</b></div>
         </div>
+        <!-- Details Section Ends -->
         <hr class="mt-0">
-        <!-- Action Section Begins -->
-        <label for="rating"><b>Ratings</b></label>
+        <!-- Rating Section Begins -->
+        <label for="rating"><b>Ratings</b> <span v-if="!order.reviews.length">(Provide ratings)</span></label>
         <hr class="mt-0">
         <div class="row">
           <div class="col">
             For Food
           </div>
-          <div class="col">
+          <div class="col text-right">
             <Rating :rating="(order.reviews.length > 0) ? order.reviews[0].rating : 0" @rated="storeRatings('food', $event)"/>
           </div>
         </div>
@@ -25,11 +28,13 @@
           <div class="col">
             For Service
           </div>
-          <div class="col">
+          <div class="col text-right">
             <Rating :rating="(order.reviews.length > 0) ? order.reviews[1].rating : 0" @rated="storeRatings('service', $event)"/>
           </div>
         </div>
         <hr>
+        <!-- Rating Section Ends -->
+        <!-- Action Section Begins -->
         <div class="row" v-if="!order.reviews.length && (rating.food && rating.service)">
           <div class="col d-flex justify-content-start align-items-end">
             <div class="form-group w-100">
@@ -46,12 +51,12 @@
         </div> <!-- Action Section Ends -->
       </div>
     </div>
-  </div>
+  </div> <!-- Order Card Section Ends -->
 </template>
 
 <script>
-  import Rating from '@/js/components/Rating'
   import { mapActions } from 'vuex'
+  import Rating from '@/js/components/Rating'
   import {GET_FOOD_DATA, SUBMIT_ORDER_RATING} from '@/js/store/action.types'
 
   export default {
@@ -78,8 +83,9 @@
         submitRating: `rating/${SUBMIT_ORDER_RATING}`
       }),
       /**
-       * Handle food orders
+       * Store ratings of order
        * @param string ratingType
+       * @param object $event
        * @return void
        */
       storeRatings (ratingType, $event) {

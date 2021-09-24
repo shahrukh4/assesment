@@ -29,24 +29,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Orders',
   components: {
-    Food: _js_components__WEBPACK_IMPORTED_MODULE_0__.Food
+    Order: _js_components__WEBPACK_IMPORTED_MODULE_0__.Order
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
-    foods: function foods(state) {
-      return state.food;
+    orders: function orders(state) {
+      return state.order;
     }
   })),
   created: function created() {
-    this.getFoods();
+    this.getOrders();
   },
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)({
-    getFoods: "food/".concat(_js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_FOOD_DATA)
+    getOrders: "order/".concat(_js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_FOOD_DATA)
   }))
 });
 
@@ -136,20 +140,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "order-section mt-2" }, [
+    _c("h2", [_vm._v("Your Orders")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.orders.orders, function(order) {
+        return _c(
+          "div",
+          { staticClass: "col-4" },
+          [
+            _c("Order", {
+              key: order.id,
+              attrs: { order: order },
+              on: { ratingSubmitted: _vm.getOrders }
+            })
+          ],
+          1
+        )
+      }),
+      0
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "food-section mt-5" }, [
-      _c("div", { staticClass: "grid grid-cols-1 md:grid-cols-2" }, [
-        _c("h1", [_vm._v("Shahrukh Anwat render")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

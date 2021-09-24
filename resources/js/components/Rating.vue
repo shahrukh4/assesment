@@ -1,6 +1,6 @@
 <template>
   <!-- Rating Section Begins -->
-  <div class="rating-section" role="button" @mouseleave="handleBlur">
+  <div class="rating-section" :role="!selected ? 'button' : ''" @mouseleave="handleBlur">
     <div v-if="!selected">
       <i
         class="fa-star ml-1 mr-1"
@@ -63,7 +63,6 @@
        * @returns void
        */
       handleHover (rating) {
-        console.log(rating)
         this.figure.current = rating
         this.figure.selected = 0
       },
@@ -90,8 +89,6 @@
 </script>
 
 <style lang="scss" scoped>
-  $ratings: 1, 2, 3, 4, 5;
-
   $ratings: (
       1: #E8441F,
       2: #ffb128,

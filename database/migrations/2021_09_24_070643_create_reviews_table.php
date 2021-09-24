@@ -29,6 +29,8 @@ class CreateReviewsTable extends Migration
                 ->onDelete('cascade');
 
             $table->integer('rating')->default(1);
+
+            $table->enum('type', ['FOOD', 'SERVICE'])->default('FOOD');
             $table->string('comment')->nullable();
 
             $table->timestamps();

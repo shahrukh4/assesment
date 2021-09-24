@@ -9,7 +9,7 @@ import { SET_FOOD_DATA } from '@/js/store/mutation.types'
 export const namespaced = true
 
 /**
- * State related to App
+ * State related to Foods
  * @type {Object}
  */
 export const state = {
@@ -17,7 +17,7 @@ export const state = {
 }
 
 /**
- * Actions related to App
+ * Actions related to Foods
  * @type {Object}
  */
 export const actions = {
@@ -41,7 +41,7 @@ export const actions = {
 }
 
 /**
- * Mutations related to App
+ * Mutations related to Foods
  * @type {Object}
  */
 export const mutations = {

@@ -8,7 +8,7 @@ import { SUBMIT_ORDER_RATING } from '@/js/store/action.types'
 export const namespaced = true
 
 /**
- * State related to App
+ * State related to Ratings
  * @type {Object}
  */
 export const state = {
@@ -16,7 +16,7 @@ export const state = {
 }
 
 /**
- * Actions related to App
+ * Actions related to Ratings
  * @type {Object}
  */
 export const actions = {
@@ -43,12 +43,5 @@ export const actions = {
  * @type {Object}
  */
 export const mutations = {
-  /**
-   * Common mutator for setting up the state
-   * @param {object} state
-   * @param {object} payload
-   */
-  // [SET_FOOD_DATA] (state, payload) {
-  //   Object.assign(state, payload)
-  // }
+
 }

@@ -18,8 +18,13 @@ const router = new VueRouter({
   routes
 })
 
+/**
+ * Route navigator for checking auth protected routes and logged in users
+ */
 router.beforeEach((to, from, next) => {
   let user = JSON.parse(localStorage.getItem('user'))
+
+  /* If user is not logged in and route is auth protected */
   if (to.meta.auth && !user.id) {
     window.location.href = 'login'
   } else {

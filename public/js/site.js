@@ -2163,8 +2163,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _js_components_Rating__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/js/components/Rating */ "./resources/js/components/Rating.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _js_components_Rating__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/js/components/Rating */ "./resources/js/components/Rating.vue");
 /* harmony import */ var _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/js/store/action.types */ "./resources/js/store/action.types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -2172,6 +2172,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2251,8 +2256,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     submitRating: "rating/".concat(_js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.SUBMIT_ORDER_RATING)
   })), {}, {
     /**
-     * Handle food orders
+     * Store ratings of order
      * @param string ratingType
+     * @param object $event
      * @return void
      */
     storeRatings: function storeRatings(ratingType, $event) {
@@ -2357,7 +2363,6 @@ __webpack_require__.r(__webpack_exports__);
      * @returns void
      */
     handleHover: function handleHover(rating) {
-      console.log(rating);
       this.figure.current = rating;
       this.figure.selected = 0;
     },
@@ -2578,7 +2583,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var namespaced = true;
 /**
- * State related to App
+ * State related to Foods
  * @type {Object}
  */
 
@@ -2586,7 +2591,7 @@ var state = {
   foods: []
 };
 /**
- * Actions related to App
+ * Actions related to Foods
  * @type {Object}
  */
 
@@ -2607,7 +2612,7 @@ var actions = _defineProperty({}, _js_store_action_types__WEBPACK_IMPORTED_MODUL
   });
 });
 /**
- * Mutations related to App
+ * Mutations related to Foods
  * @type {Object}
  */
 
@@ -2674,7 +2679,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var namespaced = true;
 /**
- * State related to App
+ * State related to Orders
  * @type {Object}
  */
 
@@ -2682,13 +2687,12 @@ var state = {
   orders: []
 };
 /**
- * Actions related to App
+ * Actions related to Orders
  * @type {Object}
  */
 
 var actions = (_actions = {}, _defineProperty(_actions, _js_store_action_types__WEBPACK_IMPORTED_MODULE_1__.GET_FOOD_DATA, function (_ref) {
-  var commit = _ref.commit,
-      state = _ref.state;
+  var commit = _ref.commit;
   return new Promise(function (resolve, reject) {
     axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/orders').then(function (_ref2) {
       var data = _ref2.data;
@@ -2719,7 +2723,7 @@ var actions = (_actions = {}, _defineProperty(_actions, _js_store_action_types__
   });
 }), _actions);
 /**
- * Mutations related to App
+ * Mutations related to Orders
  * @type {Object}
  */
 
@@ -2757,7 +2761,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var namespaced = true;
 /**
- * State related to App
+ * State related to Ratings
  * @type {Object}
  */
 
@@ -2765,7 +2769,7 @@ var state = {
   ratings: []
 };
 /**
- * Actions related to App
+ * Actions related to Ratings
  * @type {Object}
  */
 
@@ -2785,16 +2789,7 @@ var actions = _defineProperty({}, _js_store_action_types__WEBPACK_IMPORTED_MODUL
  * @type {Object}
  */
 
-var mutations = {
-  /**
-   * Common mutator for setting up the state
-   * @param {object} state
-   * @param {object} payload
-   */
-  // [SET_FOOD_DATA] (state, payload) {
-  //   Object.assign(state, payload)
-  // }
-};
+var mutations = {};
 
 /***/ }),
 
@@ -39075,7 +39070,13 @@ var render = function() {
           _vm._v(" "),
           _c("hr", { staticClass: "mt-0" }),
           _vm._v(" "),
-          _vm._m(1),
+          _c("label", { attrs: { for: "rating" } }, [
+            _c("b", [_vm._v("Ratings")]),
+            _vm._v(" "),
+            !_vm.order.reviews.length
+              ? _c("span", [_vm._v("(Provide ratings)")])
+              : _vm._e()
+          ]),
           _vm._v(" "),
           _c("hr", { staticClass: "mt-0" }),
           _vm._v(" "),
@@ -39086,7 +39087,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col" },
+              { staticClass: "col text-right" },
               [
                 _c("Rating", {
                   attrs: {
@@ -39113,7 +39114,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col" },
+              { staticClass: "col text-right" },
               [
                 _c("Rating", {
                   attrs: {
@@ -39185,14 +39186,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col" }, [_c("b", [_vm._v("Quantities")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "rating" } }, [
-      _c("b", [_vm._v("Ratings")])
-    ])
   }
 ]
 render._withStripped = true
@@ -39221,7 +39214,7 @@ var render = function() {
     "div",
     {
       staticClass: "rating-section",
-      attrs: { role: "button" },
+      attrs: { role: !_vm.selected ? "button" : "" },
       on: { mouseleave: _vm.handleBlur }
     },
     [
@@ -52848,16 +52841,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"];
 Vue.config.productionTip = false;
+/**
+ * Set userId if user is logged in
+ */
 
 if (document.querySelector("meta[name='userId']")) {
   Vue.prototype.$userId = document.querySelector("meta[name='userId']").getAttribute('content');
@@ -52865,6 +52856,10 @@ if (document.querySelector("meta[name='userId']")) {
     id: Vue.prototype.$userId
   }));
 }
+/**
+ * Redirect user to login page, if any 500 error occurred in API or user is logged out
+ */
+
 
 axios__WEBPACK_IMPORTED_MODULE_0___default().interceptors.response.use(function (response) {
   return response;
@@ -52873,25 +52868,9 @@ axios__WEBPACK_IMPORTED_MODULE_0___default().interceptors.response.use(function 
   return Promise.reject(error);
 }); // Import dependencies
 
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+ // Registering global components
 
 Vue.component('foods', __webpack_require__(/*! ./views/Foods.vue */ "./resources/js/views/Foods.vue")["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 var app = new Vue({
   el: '#app',
   store: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
