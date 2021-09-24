@@ -3,7 +3,7 @@
 - Clone the repository
 
     
-    jsjsjjs
+    git clone https://github.com/shahrukh4/assesment.git
 
 
 - Open terminal and move to directory
